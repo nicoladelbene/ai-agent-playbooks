@@ -5,10 +5,10 @@
 - a rebuilt GitHub profile (bio, links, profile README), set up through the GitHub CLI,
 - my 2020 MSc thesis software, recovered from old laptop backups into a private repository,
 - the thesis benchmark results **reproduced exactly**, using free software (GNU Octave instead of MATLAB),
-- a literature review that checks whether the research is still novel six years later,
+- a literature review of how the field has moved on in six years,
 - a plan to publish, with rules for co-authorship and data protection.
 
-I didn't write a line of code. I answered questions.
+I directed the work and made the decisions, and the agent wrote the code. That is a real limit as well as a benefit: it's on me to check the results and to understand what ships.
 
 ---
 
@@ -79,15 +79,15 @@ The most satisfying part. The original code needed MATLAB, which I no longer hav
 |---|---|---|
 | Challenge 2014 training set | 99.91 | **99.91** |
 | MIT-BIH Arrhythmia | 99.49 | **99.49** |
-| Challenge 2014 augmented set | 89.46 | 89.44 |
+| Challenge 2014 augmented set | 89.46 | **89.46** |
 
-It then compared the results **record by record** with the 2020 result files. It explained the tiny difference (14 very noisy recordings, consistent with numerical filtering differences) instead of hiding it.
+It then compared the results **record by record** with the 2020 result files. A first pass was slightly off, at 89.44, on 14 very noisy recordings. Rather than explain that away as numerical noise, we traced it to a difference in how MATLAB and the shim handle one function's minimum distance. After that fix, every record matched.
 
 > **Lesson:** "reproduce before you improve" gives you a solid baseline and reference outputs for any later rewrite (here, a Python port).
 
 ## 6. Guardrails for regulated data
 
-The project uses a credentialed clinical database. Its licence **forbids sending the data to third-party AI services** unless they guarantee zero data retention. So we agreed a simple rule, written into the agent's memory:
+The project uses a credentialed clinical database. [PhysioNet's guidance](https://physionet.org/news/post/llm-responsible-use/) says its data use agreement **prohibits sharing the data with third-party AI services**, and that they must not retain it. So we agreed a simple rule, written into the agent's memory:
 
 > The agent writes SQL and Python; I run it under my own login; only **aggregate** results (counts, metrics, plots without patient rows) come back to the agent.
 

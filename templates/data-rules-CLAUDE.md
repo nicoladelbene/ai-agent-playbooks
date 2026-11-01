@@ -21,7 +21,7 @@ It lives in: <paths / databases>. These are NEVER to be read, printed, summarise
 
 ## Why
 
-- Many data licences (e.g. PhysioNet's credentialed data use agreement) **forbid sending data to third-party AI services** without guarantees such as zero data retention.
+- Many data licences (e.g. PhysioNet's credentialed data use agreement) **restrict sending data to third-party AI services**, and a provider's retention promise may not be enough. Check the current terms.
 - Client and personal data are usually covered by contracts and privacy law (e.g. GDPR / Swiss FADP).
 - An agent that "just looks at the first rows" has already sent those rows to a model.
 
